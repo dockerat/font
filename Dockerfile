@@ -1,29 +1,34 @@
-FROM ccr.ccs.tencentyun.com/storezhang/alpine:3.15.6
+FROM storezhang/ubuntu:23.04
 
 
 LABEL author="storezhang<华寅>"
 LABEL email="storezhang@gmail.com"
 LABEL qq="160290688"
 LABEL wechat="storezhang"
-LABEL description="动态域名解析，支持阿里云、百度云、腾讯云、DNSPod等"
+LABEL description="常用字体"
 
 
-# 复制文件
-COPY docker /
+# Jetbrains Mono字体版本
+ENV NERD_FONTS_VERSION 2.1.0
+ENV JETBRAINS_BIN_FILE jetbrans.zip
 
 
 RUN set -ex \
     \
     \
     \
-    && apk update \
-    \
-    # 增加执行权限，防止出现因为无执行权限导致在Docker内部无法运行的问题
-    && chmod +x /etc/s6/ddns/* \
-    \
-    # 增加执行权限
-    && chmod +x /opt/storezhang/ddns \
+    && apt update -y \
+    && apt apt install axel unzip -y \
     \
     \
     \
-    && rm -rf /var/cache/apk/*
+    && mkdir -p ${FONT_HOME} \
+    && axel --insecure --num-connections=8 https://gh.wget.cool/https://github.com/ryanoasis/nerd-fonts/releases/download/v${NERD_FONTS_VERSION}/JetBrainsMono.zip --output ${JETBRAINS_BIN_FILE} \
+    && unzip ${JETBRAINS_BIN_FILE} -d ${FONT_HOME} \
+    \
+    \
+    \
+    # 清理镜像，减少无用包 \
+    && apt autoremove axel unzip -y \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt autoclean
