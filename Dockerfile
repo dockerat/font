@@ -8,7 +8,8 @@ LABEL wechat="storezhang"
 LABEL description="常用字体"
 
 
-ENV FONT_HOME=/opt/system/font
+ENV FONT_HOME=/usr/lib/font
+
 # Jetbrains Mono字体版本
 ENV NERD_FONTS_VERSION 2.1.0
 ENV JETBRAINS_BIN_FILE jetbrans.zip
@@ -24,7 +25,7 @@ RUN set -ex \
     \
     \
     && mkdir -p ${FONT_HOME} \
-    && axel --insecure --num-connections=8 https://gh.wget.cool/https://github.com/ryanoasis/nerd-fonts/releases/download/v${NERD_FONTS_VERSION}/JetBrainsMono.zip --output ${JETBRAINS_BIN_FILE} \
+    && axel --insecure --num-connections=8 https://ghproxy.com/https://github.com/ryanoasis/nerd-fonts/releases/download/v${NERD_FONTS_VERSION}/JetBrainsMono.zip --output ${JETBRAINS_BIN_FILE} \
     && unzip ${JETBRAINS_BIN_FILE} -d ${FONT_HOME} \
     \
     \
