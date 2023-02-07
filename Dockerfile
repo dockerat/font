@@ -19,7 +19,7 @@ RUN set -ex \
     \
     \
     && apt update -y \
-    && apt apt install axel unzip -y \
+    && apt install axel unzip -y \
     \
     \
     \
