@@ -8,6 +8,7 @@ LABEL wechat="storezhang"
 LABEL description="常用字体"
 
 
+ENV FONT_HOME=/opt/system/font
 # Jetbrains Mono字体版本
 ENV NERD_FONTS_VERSION 2.1.0
 ENV JETBRAINS_BIN_FILE jetbrans.zip
